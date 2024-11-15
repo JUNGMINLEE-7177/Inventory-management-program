@@ -26,10 +26,30 @@ void add_product() {
 
     printf("상품 이름: ");
     scanf("%s", new_product.name);
-    printf("수량: ");
-    scanf("%d", &new_product.quantity);
-    printf("가격: ");
-    scanf("%f", &new_product.price);
+    while (1) {
+        printf("수량: ");
+        if (scanf("%d", &new_product.quantity) == 1) {
+            if (new_product.quantity >= 0) break; // 유효한 수량
+            else printf("수량은 0 이상이어야 합니다. 다시 입력하세요.\n");
+        }
+        else {
+            printf("유효하지 않은 입력입니다. 숫자를 입력하세요.\n");
+            while (getchar() != '\n'); // 입력 버퍼 비우기
+        }
+    }
+
+    // 가격 입력 처리
+    while (1) {
+        printf("가격: ");
+        if (scanf("%f", &new_product.price) == 1) {
+            if (new_product.price >= 0) break; // 유효한 가격
+            else printf("가격은 0 이상이어야 합니다. 다시 입력하세요.\n");
+        }
+        else {
+            printf("유효하지 않은 입력입니다. 숫자를 입력하세요.\n");
+            while (getchar() != '\n'); // 입력 버퍼 비우기
+        }
+    }
 
     time_t now = time(NULL);  // 현재 시간을 가져옴
     new_product.intime = *localtime(&now);  // 현재 시간을 localtime으로 변환하여 저장
@@ -121,7 +141,11 @@ int main() {
         printf("4. 상품 삭제\n");
         printf("5. 종료\n");
         printf("선택: ");
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1) {
+            printf("잘못된 입력입니다. 숫자를 입력하세요.\n");
+            while (getchar() != '\n'); // 입력 버퍼 비우기
+            continue; // 처음으로 돌아가기
+        }
 
         switch (choice) {
         case 1:
