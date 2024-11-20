@@ -1,0 +1,22 @@
+﻿  Inventory-management-program.cpp
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(28,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(30,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(32,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(35,27): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(50,12): warning C4473: 'printf': 서식 문자열에 대한 인수가 충분하게 전달되지 않았습니다.
+      C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(50,12):
+      자리 표시자 및 해당 매개 변수에는 variadic 인수가 10개 필요하지만 9개가 제공되었습니다.
+      C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(50,12):
+      누락된 variadic 인수 10이(가) 서식 문자열 '%02d'에 필요합니다.
+  
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(43,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(68,147): warning C4474: 'printf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+      C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(68,147):
+      자리 표시자 및 해당 매개 변수에는 variadic 인수가 4개 필요하지만 9개가 제공되었습니다.
+  
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(79,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(87,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(89,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(97,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\Inventory-management-program\Inventory-management-program.cpp(123,9): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Inventory-management-program.vcxproj -> C:\Users\min11\OneDrive\바탕 화면\C_test\Inventory-management-program\x64\Debug\Inventory-management-program.exe
