@@ -25,9 +25,11 @@ int num_or_char(char str[]) {
     return 1;  // 숫자이면 1 반환
 }
 void add_file() {
-    FILE* file = fopen("products.txt", "a");
+    // Open the file in "w" mode to overwrite its contents
+    FILE* file = fopen("products.txt", "w");
     if (file == NULL) {
-        file = fopen("products.txt", "a");
+        printf("Error: Unable to open file.\n");
+        return;
     }
     for (int i = 0; i < product_count; i++) {
         fprintf(file, "%d %s %d %.2f %04d-%02d-%02d %02d:%02d\n",
@@ -43,6 +45,7 @@ void add_file() {
     }
     fclose(file);
 }
+
 void load_file() {
     FILE* file = fopen("products.txt", "r");
     if (file == NULL) {
