@@ -16,6 +16,47 @@ typedef struct {
 
 Product inventory[MAX_PRODUCTS];
 int product_count = 0;
+//오름차순 정렬
+void sort_id() {
+    for (int i = 0; i < product_count - 1; i++) {
+        for (int j = i + 1; j < product_count; j++) {
+            if (inventory[i].id > inventory[j].id) {
+                Product temp = inventory[i];
+                inventory[i] = inventory[j];
+                inventory[j] = temp;
+            }
+        }
+    }
+}
+
+//ID 비어있나 아닌가 확인
+int is_id_enpty(int id) {
+    for (int i = 0; i < product_count; i++) {
+        if (inventory[i].id == id) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// 빈 ID찾기 
+int find_no_id() {
+    for (int id = 1; id <= product_count + 1; id++) {
+        if (!is_id_enpty(id)) {
+            return id;
+        }
+    }
+    return product_count + 1;
+}
+
+int find_product_by_name(const char* name) {
+    for (int i = 0; i < product_count; i++) {
+        if (strcmp(inventory[i].name, name) == 0) {
+            return i;  // 이름이 같은 상품이 있으면 해당 인덱스 반환
+        }
+    }
+    return -1;  // 상품을 찾지 못했으면 -1 반환
+}
 
 int num_or_char(char str[]) {
     for (int i = 0; str[i] != '\0'; i++) {
@@ -25,10 +66,9 @@ int num_or_char(char str[]) {
     return 1;  // 숫자이면 1 반환
 }
 void add_file() {
-    // Open the file in "w" mode to overwrite its contents
     FILE* file = fopen("products.txt", "w");
     if (file == NULL) {
-        printf("Error: Unable to open file.\n");
+        printf("파일이 없습니다.\n");
         return;
     }
     for (int i = 0; i < product_count; i++) {
@@ -74,12 +114,28 @@ void add_product() {
         printf("재고 공간이 부족합니다!\n");
         return;
     }
-
     Product new_product;
-    new_product.id = product_count + 1;
+    new_product.id = find_no_id();
 
-    printf("상품 이름: ");
-    scanf("%s", new_product.name);
+    // 상품 이름 입력
+    while (1) {
+        int name_exists = 0;
+        printf("상품 이름: ");
+        scanf("%s", new_product.name);
+
+        // 기존 이름과 비교
+        for (int i = 0; i < product_count; i++) {
+            if (strcmp(inventory[i].name, new_product.name) == 0) {
+                printf("이미 존재하는 상품 이름입니다. 다른 이름을 입력하세요.\n");
+                name_exists = 1;
+                break;
+            }
+        }
+
+        if (!name_exists) break; // 이름이 유효한 경우 반복 종료
+    }
+
+    // 수량 입력
     while (1) {
         printf("수량: ");
         if (scanf("%d", &new_product.quantity) == 1) {
@@ -92,7 +148,7 @@ void add_product() {
         }
     }
 
-    // 가격 입력 처리
+    // 가격 입력
     while (1) {
         printf("가격: ");
         if (scanf("%f", &new_product.price) == 1) {
@@ -105,12 +161,15 @@ void add_product() {
         }
     }
 
+    // 시간 저장
     time_t now = time(NULL);  // 현재 시간을 가져옴
     new_product.intime = *localtime(&now);  // 현재 시간을 localtime으로 변환하여 저장
     inventory[product_count++] = new_product;
 
     printf("상품이 추가되었습니다!\n");
+    sort_id();
 }
+
 
 void check_low() {
     printf("\n=== 재고 부족 예상 상품 ===\n");
@@ -205,8 +264,13 @@ void update_product() {
             return;
         }
 
-        printf("새로운 수량: ");
-        scanf("%d", &inventory[id - 1].quantity);
+        printf("수정할 수량: ");
+        int change;
+        scanf("%d", &change);
+        if (change > 0)
+            inventory[id - 1].quantity += change;
+        else if (change < 0)
+            inventory[id - 1].quantity += change;
         printf("새로운 가격: ");
         scanf("%f", &inventory[id - 1].price);
         printf("상품이 수정되었습니다!\n");
@@ -215,8 +279,13 @@ void update_product() {
         for (int i = 0; i < product_count; i++) {
             if (strcmp(inventory[i].name, input) == 0) {
                 found = 1;
+                int change;
                 printf("새로운 수량: ");
-                scanf("%d", &inventory[i].quantity);
+                scanf("%d", &change);
+                if (change > 0)
+                    inventory[i].quantity += change;
+                else if (change < 0)
+                    inventory[i].quantity += change;
                 printf("새로운 가격: ");
                 scanf("%f", &inventory[i].price);
                 printf("상품이 수정되었습니다!\n");
@@ -237,17 +306,22 @@ void delete_product() {
     int found = 0;
     if (num_or_char(input)) {
         int id = atoi(input);
-
-        if (id < 1 || id > product_count) {
-            printf("유효하지 않은 ID입니다.\n");
-            return;
+        for (int i = 0; i < product_count; i++) {
+            if (id < 1 || id > product_count) {
+                printf("유효하지 않은 ID입니다.\n");
+                return;
+            }
+            if (inventory[i].id == id) {
+                found = 1;
+                for (int j = i; j < product_count - 1; j++) {
+                    inventory[j] = inventory[j + 1];
+                }
+                product_count--;
+                printf("상품(ID: %d)이 삭제되었습니다!\n", id);
+                sort_id();
+                break;
+            }
         }
-
-        for (int i = id - 1; i < product_count - 1; i++) {
-            inventory[i] = inventory[i + 1];
-        }
-        product_count--;
-        printf("상품이 삭제되었습니다!\n");
     }
     else {
         for (int i = 0; i < product_count; i++) {
@@ -258,6 +332,7 @@ void delete_product() {
                 }
                 product_count--;
                 printf("상품이 삭제되었습니다!\n");
+                sort_id();
                 break;
             }
         }
